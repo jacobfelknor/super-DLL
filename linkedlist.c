@@ -5,7 +5,7 @@
  *      Author: jfelknor
  */
 
-//need to fix pointer arithmetic
+//need to fix pointer arithmetic. Cast to uint8_t so that + operator only increments pointer by 1 byte
 
 #include "linkedlist.h"
 
