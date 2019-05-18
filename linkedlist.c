@@ -7,37 +7,13 @@
 
 #include "linkedlist.h"
 
-//#define NULL 0
+#define LIST_LENGTH 50
 
-//typedef struct {
-//	uint32_t x;
-//} user_item_t;
-//
-//
-//struct Node{
-//	bool free;
-//	struct Node *next;
-//	struct Node *prev;
-//	uint32_t timeStamp;
-//	uint8_t data[]  //array of bytes(uint8_t), can hold custom size data
-//};
-//
-//typedef struct {
-//	struct Node *pbuffer;	///< Buffer to hold items
-//	uint32_t length;		///< Max number of items
-//	uint32_t item_size;		///< Size of an item in bytes
-//}dlldesc_t;
-
-//#define NUM_ITEMS	(4)
-//
-//uint8_t listbuf[sizeof(item_t) * NUM_ITEMS];
-//dlldesc_t list;
-//
-//arrInit(&list, NUM_ITEMS, sizeof(item_t)); //this allocates memory for n items of certain size, for given list
-
-//struct Node dllMem[arrSize]; //old way of giving lists memory
-
-
+typedef struct{
+	uint8_t num1;
+	uint8_t num2;
+	char message[50];
+}testType;
 
 
 void listInit(dlldesc_t *list, uint8_t NUM_ITEMS, uint32_t size){ //sets up memory space for linked list
@@ -141,32 +117,38 @@ void deleteNode(dlldesc_t *list, uint8_t target[]){ //remove targeted node from 
 
 }
 
-typedef struct{
-	uint8_t num1;
-	uint8_t num2;
-	char message[5];
-}testType;
+void dispTestTypeList(dlldesc_t *list){
+	struct Node* walker = list->head;
+
+	while(walker != NULL){
+		printf("%s\n", ((testType*)walker->data)->message);
+		printf("%d\n", ((testType*)walker->data)->num1);
+		printf("%d\n", ((testType*)walker->data)->num2);
+		walker = walker->next;
+	}
+}
+
 
 int main(){
 
 	dlldesc_t list0;
 
-	testType t0[50];
+	testType t0[LIST_LENGTH];
 
-	for(uint8_t i = 0; i < 50; i++){
+	for(uint8_t i = 0; i < LIST_LENGTH; i++){
 		t0[i].num1 = i;
 		t0[i].num2 = 2*i + 1;
 		strcpy(t0[i].message, "Hello");
 	}
 
 
-	listInit(&list0, 50, sizeof(testType));
+	listInit(&list0, LIST_LENGTH, sizeof(testType));
 
-	for(uint8_t i = 0; i < 50; i++){
+	for(uint8_t i = 0; i < LIST_LENGTH; i++){
 		append(&list0, (uint8_t*)&t0[i]);
 	}
 
-
+	dispTestTypeList(&list0);
 	//deleteNode(&list0, &t0);
 
 
