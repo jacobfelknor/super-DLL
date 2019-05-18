@@ -124,7 +124,7 @@ void dispTestTypeList(dlldesc_t *list){
 		printf("%s\n", ((testType*)walker->data)->message);
 		printf("%d\n", ((testType*)walker->data)->num1);
 		printf("%d\n", ((testType*)walker->data)->num2);
-		walker = walker->next;
+		walker = walker->next; 
 	}
 }
 
