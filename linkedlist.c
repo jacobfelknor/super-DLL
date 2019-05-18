@@ -5,6 +5,8 @@
  *      Author: jfelknor
  */
 
+//need to fix pointer arithmetic
+
 #include "linkedlist.h"
 
 #define LIST_LENGTH 50
