@@ -143,7 +143,9 @@ int main(){
 	}
 
 	dispTestTypeList(&list0);
-	//deleteNode(&list0, &t0);
+	deleteNode(&list0, (uint8_t*)&(t0[0]));
+	printf("After deletion: \n \n");
+	dispTestTypeList(&list0);
 
 
 

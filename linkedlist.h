@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define LIST_LENGTH 50 //capacity of linkedlist. only allocated
+#define LIST_LENGTH 5 //capacity of linkedlist. only allocated
 					   // memory for this many custom items 
 
 typedef struct{  //test data type to fill list with
