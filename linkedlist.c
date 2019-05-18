@@ -7,7 +7,7 @@
 
 #include "linkedlist.h"
 
-#define NULL 0
+//#define NULL 0
 
 //typedef struct {
 //	uint32_t x;
@@ -42,7 +42,7 @@
 
 void listInit(dlldesc_t *list, uint8_t NUM_ITEMS, uint32_t size){ //sets up memory space for linked list
 
-	list->pbuffer = (struct Node*) pvPortMalloc(NUM_ITEMS * (sizeof(struct Node) + size)); //allocate necessary memory
+	list->pbuffer = (struct Node*) malloc(NUM_ITEMS * (sizeof(struct Node) + size)); //allocate necessary memory
 	list->length = NUM_ITEMS;	//set number of items for this list (length)
 	list->item_size = size;		//set size of each item in this list
 	list->head = NULL;	// initialize head of list to NULL
@@ -75,7 +75,7 @@ void append(dlldesc_t *list, uint8_t newItem[]){//appends a new item to the end 
 		(list)->head->next = NULL;
 		(list)->head->prev = NULL;
 		(list)->head->free = false;
-		(list)->head->timeStamp = xTaskGetTickCount();
+		//(list)->head->timeStamp = xTaskGetTickCount();
 		memcpy((list)->head->data, newItem, (list)->item_size); //use memcpy to store given data in the Node.
 	}else{
 		//list is not empty, append list with new data
@@ -90,7 +90,7 @@ void append(dlldesc_t *list, uint8_t newItem[]){//appends a new item to the end 
 		newData->next = NULL;
 		newData->prev = temp;
 		newData->free = false;
-		newData->timeStamp = xTaskGetTickCount();
+		//newData->timeStamp = xTaskGetTickCount();
 
 	}
 }
@@ -147,7 +147,7 @@ typedef struct{
 	char message[5];
 }testType;
 
-void myCatchAll(){
+int main(){
 
 	dlldesc_t list0;
 
@@ -163,7 +163,7 @@ void myCatchAll(){
 	listInit(&list0, 50, sizeof(testType));
 
 	for(uint8_t i = 0; i < 50; i++){
-		append(&list0, &t0[i]);
+		append(&list0, (uint8_t*)&t0[i]);
 	}
 
 
@@ -171,6 +171,6 @@ void myCatchAll(){
 
 
 
-
+	return 0;
 
 }

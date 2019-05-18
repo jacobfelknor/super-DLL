@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h>
 
 
 
@@ -45,6 +46,6 @@ struct Node* search(dlldesc_t *list, uint8_t sKey[]);
 
 void deleteNode(dlldesc_t *list, uint8_t target[]);
 
-void myCatchAll(void);
+//void myCatchAll(void);
 
 #endif /* INC_LINKEDLIST_H_ */
