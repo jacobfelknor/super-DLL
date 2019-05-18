@@ -9,14 +9,6 @@
 
 #include "linkedlist.h"
 
-#define LIST_LENGTH 50
-
-typedef struct{
-	uint8_t num1;
-	uint8_t num2;
-	char message[50];
-}testType;
-
 
 void listInit(dlldesc_t *list, uint8_t NUM_ITEMS, uint32_t size){ //sets up memory space for linked list
 

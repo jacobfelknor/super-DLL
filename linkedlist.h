@@ -14,11 +14,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define LIST_LENGTH 50 //capacity of linkedlist. only allocated
+					   // memory for this many custom items 
 
-
-typedef struct {
-	uint32_t x;
-} user_item_t;
+typedef struct{  //test data type to fill list with
+	uint8_t num1;
+	uint8_t num2;
+	char message[50];
+}testType;
 
 
 struct Node{
