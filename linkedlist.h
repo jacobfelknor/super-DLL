@@ -25,6 +25,7 @@ typedef struct{  //test data type to fill list with
 
 
 struct Node{
+	uint32_t pad;
 	bool free;
 	struct Node *next;
 	struct Node *prev;

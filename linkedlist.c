@@ -19,9 +19,11 @@ void listInit(dlldesc_t *list, uint8_t NUM_ITEMS, uint32_t size){ //sets up memo
 
 	for(uint8_t i = 0; i < NUM_ITEMS; i++){ //for each space in allocated memory, initialize next/prev pointers and indicate space
 											// is free
-		(list->pbuffer + i*(sizeof(struct Node) + size))->next = NULL;
-		(list->pbuffer + i*(sizeof(struct Node) + size))->prev = NULL;
-		(list->pbuffer + i*(sizeof(struct Node) + size))->free = true;
+		uint8_t *iterator = ((uint8_t*)list->pbuffer) + i*(sizeof(struct Node) + size);
+		((struct Node*)iterator)->pad = 0xBAADA55;
+		((struct Node*)iterator)->next = NULL;
+		((struct Node*)iterator)->prev = NULL;
+		((struct Node*)iterator)->free = true;
 	}
 }
 
@@ -31,8 +33,9 @@ struct Node* findFree(dlldesc_t *list){ //finds a free spot in previously alloca
 										//if no free spots are available, return a NULL pointer
 	struct Node* ret = NULL;
 	for(uint8_t i = 0; i < list->length; i++){
-		if((list->pbuffer + i*(sizeof(struct Node) + list->item_size))->free){
-			ret = (list->pbuffer + i*(sizeof(struct Node) + list->item_size));
+		uint8_t *iterator = ((uint8_t*)list->pbuffer) + i*(sizeof(struct Node) + list->item_size);
+ 		if(((struct Node*)iterator)->free){
+			ret = ((struct Node*)iterator);
 			break;
 		}
 	}
@@ -115,6 +118,7 @@ void dispTestTypeList(dlldesc_t *list){
 	struct Node* walker = list->head;
 
 	while(walker != NULL){
+		printf("pad: %x\n", walker->pad);
 		printf("%s\n", ((testType*)walker->data)->message);
 		printf("%d\n", ((testType*)walker->data)->num1);
 		printf("%d\n", ((testType*)walker->data)->num2);
